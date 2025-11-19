@@ -1,15 +1,31 @@
-from turtle import Screen
+from turtle import Screen, Turtle
 from snake import Snake
+
+
+def draw_border():
+    border = Turtle()
+    border.speed("fastest")
+    border.hideturtle()
+    border.penup()
+    border.goto(-280, -280)
+    border.pendown()
+    border.pensize(3)
+    border.color("white")
+    for _ in range(4):
+        border.forward(560)
+        border.left(90)
+
 
 class SnakeScreen:
     def __init__(self):
         self.screen = Screen()
-        self.screen.setup(600, 600)
-        self.screen.bgcolor("black")
+        self.screen.setup(620, 620)
+        self.screen.bgcolor("#006600")
         self.screen.title("PySnake")
         self.screen.tracer(0)
         self.can_snake_turn = True
         self.buffered_turn = None
+        draw_border()
 
     def reset_turn(self):
         def enable_and_apply():
@@ -40,3 +56,7 @@ class SnakeScreen:
 
     def update(self):
         self.screen.update()
+
+    def exitonclick(self):
+        self.screen.exitonclick()
+

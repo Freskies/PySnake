@@ -12,7 +12,7 @@ class Segment(Turtle):
         self.y = y
         self.penup()
         self.shape("square")
-        self.color("white")
+        self.color("#00cc00")
         self.goto(x, y)
 
     def move(self, direction):

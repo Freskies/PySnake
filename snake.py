@@ -38,3 +38,13 @@ class Snake:
     def go_right(self):
         if self.head_direction != 180:
             self.head_direction = 0
+
+    def is_game_over(self):
+        if (not -280 < self.head.x < 280) or (not -280 < self.head.y < 280):
+            return True
+        if len(self.segment_list) < 4:
+            return False
+        for segment in self.segment_list[4:]:
+            if self.head.distance(segment) < 15:
+                return True
+        return False
