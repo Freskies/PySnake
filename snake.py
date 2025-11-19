@@ -7,6 +7,7 @@ class Snake:
     def __init__(self):
         self.head_direction = 0
         self.segment_list = [Segment(0, 0, 0)]
+        self.head = self.segment_list[0]
         self.add_segment()
         self.add_segment()
 
