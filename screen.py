@@ -1,6 +1,14 @@
 from turtle import Screen, Turtle
 from snake import Snake
 
+BG_COLOR = "#006600"
+
+# message turtle
+message_turtle = Turtle()
+message_turtle.hideturtle()
+message_turtle.penup()
+message_turtle.color("white")
+
 
 def draw_border():
     border = Turtle()
@@ -15,12 +23,19 @@ def draw_border():
         border.forward(560)
         border.left(90)
 
+def draw_start_message(is_game_over=False):
+    message_turtle.goto(0, 20)
+    message_turtle.write("Press SPACE to Start", align="center", font=("Courier", 24, "normal"))
+    if is_game_over:
+        message_turtle.goto(0, 60)
+        message_turtle.write("GAME OVER!", align="center", font=("Courier", 30, "normal"))
+
 
 class SnakeScreen:
     def __init__(self):
         self.screen = Screen()
         self.screen.setup(620, 620)
-        self.screen.bgcolor("#006600")
+        self.screen.bgcolor(BG_COLOR)
         self.screen.title("PySnake")
         self.screen.tracer(0)
         self.screen.listen()
@@ -64,20 +79,19 @@ class SnakeScreen:
 
     def wait_for_start(self):
         self.waiting_for_start = True
-
-        start_turtle = Turtle()
-        start_turtle.hideturtle()
-        start_turtle.penup()
-        start_turtle.color("white")
-        start_turtle.goto(0, 0)
-        start_turtle.write("Press SPACE to start", align="center", font=("Courier", 24, "normal"))
+        draw_start_message()
         self.screen.update()
 
         def start_game():
-            start_turtle.clear()
+            message_turtle.clear()
             self.screen.update()
             self.waiting_for_start = False
             self.game_on = True
 
         self.screen.onkey(start_game, "space")
 
+    def reset_game(self):
+        self.game_on = False
+        self.waiting_for_start = False
+        draw_start_message(is_game_over=True)
+        self.screen.update()
