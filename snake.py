@@ -1,12 +1,12 @@
 import math
 
-from segment import Segment, SEGMENT_SIDE
+from segment import Segment, SEGMENT_SIDE, HeadSegment
 
 
 class Snake:
     def __init__(self):
         self.head_direction = 0
-        self.segment_list = [Segment(0, 0, 0)]
+        self.segment_list: list[Segment] = [HeadSegment(0, 0, 0)]
         self.head = self.segment_list[0]
         self.add_segment()
         self.add_segment()

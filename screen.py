@@ -42,7 +42,8 @@ class SnakeScreen:
         self.can_snake_turn = True
         self.buffered_turn = None
         self.waiting_for_start = False
-        self.game_on = False
+        self.game_on = False # the game currently being played
+        self.game_is_running = True # the game application running
         draw_border()
 
     def reset_turn(self):
@@ -88,7 +89,11 @@ class SnakeScreen:
             self.waiting_for_start = False
             self.game_on = True
 
+        def exit_game():
+            self.game_is_running = False
+
         self.screen.onkey(start_game, "space")
+        self.screen.onkey(exit_game, "Escape")
 
     def reset_game(self):
         self.game_on = False

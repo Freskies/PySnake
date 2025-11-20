@@ -11,7 +11,7 @@ food = Food(snake)
 screen.listen_snake(snake)
 screen.update()
 
-while True:
+while screen.game_is_running:
     if not screen.game_on:
         screen.wait_for_start()
     elif screen.waiting_for_start:
