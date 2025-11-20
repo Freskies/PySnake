@@ -4,6 +4,12 @@ from screen import SnakeScreen
 from snake import Snake
 import time
 
+"""
+TODO:
+- clear start message when game starts
+- check collision with walls when buffered turns
+"""
+
 screen = SnakeScreen()
 scoreboard = Scoreboard()
 snake = Snake()
@@ -12,15 +18,20 @@ screen.listen_snake(snake)
 screen.update()
 
 while True:
-    snake.move()
-    if snake.is_game_over():
-        scoreboard.game_over()
-        break
-    screen.update()
-    time.sleep(0.1)
-    if snake.head.distance(food) < 15:
-        food.goto_random(snake)
-        snake.add_segment()
-        scoreboard.increase_score()
+    if not screen.game_on:
+        screen.wait_for_start()
+    elif screen.waiting_for_start:
+        time.sleep(0.1)
+    else:
+        snake.move()
+        if snake.is_game_over():
+            scoreboard.game_over()
+            break
+        screen.update()
+        time.sleep(0.1)
+        if snake.head.distance(food) < 15:
+            food.goto_random(snake)
+            snake.add_segment()
+            scoreboard.increase_score()
 
 screen.exitonclick()

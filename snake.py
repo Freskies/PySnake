@@ -48,3 +48,9 @@ class Snake:
             if self.head.distance(segment) < 15:
                 return True
         return False
+
+    def reset(self):
+        for segment in self.segment_list:
+            segment.hideturtle()
+        self.segment_list.clear()
+        self.__init__()
