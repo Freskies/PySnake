@@ -32,7 +32,9 @@ class HeadSegment(Segment):
             eye.shape("circle")
             eye.color("black")
             eye.shapesize(0.2, 0.2)
+            eye.showturtle()
         self.move(direction)
+
 
     def move(self, direction):
         super().move(direction)
@@ -53,7 +55,6 @@ class HeadSegment(Segment):
         )
         for eye, pos in zip(self.eyes, eyes_pos):
             eye.goto(pos)
-            eye.showturtle()
 
     def hideturtle(self):
         super().hideturtle()
