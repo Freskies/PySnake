@@ -6,7 +6,7 @@ class Scoreboard(Turtle):
     def __init__(self):
         super().__init__()
         self.score = 0
-        self.highscore = 0
+        self.highscore = Scoreboard.get_saved_highscore()
         self.hideturtle()
         self.penup()
         self.color("white")
@@ -21,7 +21,18 @@ class Scoreboard(Turtle):
         self.score += 1
         if self.score > self.highscore:
             self.highscore = self.score
+            self.save_highscore()
         self.update_scoreboard()
 
     def reset_score(self):
         self.score = 0
+        self.update_scoreboard()
+
+    @staticmethod
+    def get_saved_highscore():
+        with open("highscore.txt", mode="r") as file:
+            return int(file.read())
+
+    def save_highscore(self):
+        with open("highscore.txt", mode="w") as file:
+            file.write(str(self.highscore))
